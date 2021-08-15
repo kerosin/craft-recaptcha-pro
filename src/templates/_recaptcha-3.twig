@@ -1,0 +1,57 @@
+{#
+/**
+ * reCAPTCHA Pro plugin for Craft CMS 3.x
+ *
+ * reCAPTCHA Pro _recaptcha-3.twig
+ *
+ * @author    kerosin
+ * @copyright Copyright (c) 2021 kerosin
+ * @link      https://github.com/kerosin
+ * @package   RecaptchaPro
+ * @since     1.0.0
+ */
+#}
+
+{% if siteKey is not empty %}
+    {% set action = options.action|default(defaultActionValue) %}
+    {{ hiddenInput(siteKeyParam, siteKey|hash) }}
+    {{ hiddenInput(actionParam, action|hash) }}
+    {{ hiddenInput(responseTokenParam, '', {id: 'g-recaptcha'}) }}
+    <script src="{{ apiUrl }}?render={{ siteKey }}"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const input = document.getElementById('g-recaptcha');
+
+            if (!input) {
+                return;
+            }
+
+            {% if craft.recaptchaPro.isTrigger3Onload(options.trigger) %}
+                grecaptcha.ready(function () {
+                    grecaptcha.execute('{{ siteKey }}', {action: '{{ action }}'}).then(function (token) {
+                        input.value = token;
+                    });
+                });
+            {% else %}
+                const form = input.closest('form');
+
+                if (!form) {
+                    return;
+                }
+
+                form.addEventListener('submit', function (event) {
+                    event.preventDefault();
+
+                    form.classList.add('recaptcha-pro-is-loading');
+
+                    grecaptcha.ready(function () {
+                        grecaptcha.execute('{{ siteKey }}', {action: '{{ action }}'}).then(function (token) {
+                            input.value = token;
+                            form.submit();
+                        });
+                    });
+                });
+            {% endif %}
+        });
+    </script>
+{% endif %}

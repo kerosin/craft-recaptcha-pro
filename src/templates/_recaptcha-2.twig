@@ -1,0 +1,69 @@
+{#
+/**
+ * reCAPTCHA Pro plugin for Craft CMS 3.x
+ *
+ * reCAPTCHA Pro _recaptcha-2.twig
+ *
+ * @author    kerosin
+ * @copyright Copyright (c) 2021 kerosin
+ * @link      https://github.com/kerosin
+ * @package   RecaptchaPro
+ * @since     1.0.0
+ */
+#}
+
+{% if siteKey is not empty %}
+    {% set recaptchaId = options.id is defined and options.id is not empty ? options.id : 'g-recaptcha' %}
+    {% if options.size is defined and options.size == 'invisible' %}
+        <script>
+            {% if options.callback is not defined or options.callback is empty %}
+                {% set options = options|merge({callback: 'recaptchaProOnSubmit'}) %}
+
+                function recaptchaProOnSubmit() {
+                    const recaptchaEl = document.getElementById('{{ recaptchaId }}');
+
+                    if (!recaptchaEl) {
+                        return;
+                    }
+
+                    const form = recaptchaEl.closest('form');
+
+                    if (!form) {
+                        return;
+                    }
+
+                    form.submit();
+                }
+            {% endif %}
+
+            document.addEventListener('DOMContentLoaded', function () {
+                const recaptchaEl = document.getElementById('{{ recaptchaId }}');
+
+                if (!recaptchaEl) {
+                    return;
+                }
+
+                const form = recaptchaEl.closest('form');
+
+                if (!form) {
+                    return;
+                }
+
+                form.addEventListener('submit', function (event) {
+                    event.preventDefault();
+
+                    form.classList.add('recaptcha-pro-is-loading');
+
+                    grecaptcha.execute();
+                });
+            });
+        </script>
+    {% endif %}
+    {% set recaptchaAttrs = {
+        id: recaptchaId,
+        data: {sitekey: siteKey}|merge(options|filter((v, k) => k not in ['version', 'id', 'sitekey', 'invisible']))
+    } %}
+    {{ hiddenInput(siteKeyParam, siteKey|hash) }}
+    <script src="{{ apiUrl }}" async defer></script>
+    <div class="g-recaptcha recaptcha-pro-g-recaptcha"{{ attr(recaptchaAttrs) }}></div>
+{% endif %}

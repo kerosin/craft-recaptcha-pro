@@ -1,0 +1,221 @@
+{# @var craft \craft\web\twig\variables\CraftVariable #}
+{#
+/**
+ * reCAPTCHA Pro plugin for Craft CMS 3.x
+ *
+ * reCAPTCHA Pro settings.twig
+ *
+ * @author    kerosin
+ * @copyright Copyright (c) 2021 kerosin
+ * @link      https://github.com/kerosin
+ * @package   RecaptchaPro
+ * @since     1.0.0
+ */
+#}
+
+{% import '_includes/forms' as forms %}
+
+<h2>{{ 'General Settings'|t('recaptcha-pro') }}</h2>
+
+{{ forms.lightswitchField({
+    label: 'Validate Contact Form'|t('recaptcha-pro'),
+    instructions: 'Enable to validate the official [Craft CMS contact form plugin](https://github.com/craftcms/contact-form).'|t('recaptcha-pro'),
+    id: 'validateContactForm',
+    name: 'validateContactForm',
+    on: settings.validateContactForm,
+    errors: settings.getErrors('validateContactForm')})
+}}
+
+{{ forms.lightswitchField({
+    label: 'Validate User Registration Form'|t('recaptcha-pro'),
+    id: 'validateUserRegistrationForm',
+    name: 'validateUserRegistrationForm',
+    on: settings.validateUserRegistrationForm,
+    errors: settings.getErrors('validateUserRegistrationForm')})
+}}
+
+<hr>
+
+<h2>{{ 'reCAPTCHA v3 Settings'|t('recaptcha-pro') }}</h2>
+
+{{ forms.textField({
+    label: 'Site Key'|t('recaptcha-pro'),
+    id: 'siteKey3',
+    name: 'siteKey3',
+    value: settings.siteKey3,
+    errors: settings.getErrors('siteKey3')})
+}}
+
+{{ forms.textField({
+    label: 'Secret Key'|t('recaptcha-pro'),
+    id: 'secretKey3',
+    name: 'secretKey3',
+    value: settings.secretKey3,
+    errors: settings.getErrors('secretKey3')})
+}}
+
+{{ forms.selectField({
+    label: 'Trigger'|t('recaptcha-pro'),
+    id: 'trigger3',
+    name: 'trigger3',
+    value: settings.trigger3,
+    options: settings.getTriggers3(),
+    errors: settings.getErrors('trigger3')})
+}}
+
+{{ forms.textField({
+    label: 'Action'|t('recaptcha-pro'),
+    id: 'action3',
+    name: 'action3',
+    value: settings.action3,
+    errors: settings.getErrors('action3'),
+    placeholder: action3DefaultValue})
+}}
+
+{{ forms.textField({
+    label: 'Score'|t('recaptcha-pro'),
+    id: 'score3',
+    name: 'score3',
+    value: settings.score3,
+    errors: settings.getErrors('score3'),
+    placeholder: score3DefaultValue})
+}}
+
+{{ forms.textField({
+    label: 'Error Message'|t('recaptcha-pro'),
+    id: 'errorMessage3',
+    name: 'errorMessage3',
+    value: settings.errorMessage3,
+    errors: settings.getErrors('errorMessage3'),
+    placeholder: errorMessageDefault})
+}}
+
+<h3>{{ 'Contact Form'|t('recaptcha-pro') }}</h3>
+
+{{ forms.textField({
+    label: 'Score'|t('recaptcha-pro'),
+    id: 'contactFormScore3',
+    name: 'contactFormScore3',
+    value: settings.contactFormScore3,
+    errors: settings.getErrors('contactFormScore3'),
+    placeholder: settings.score3 is not empty ? settings.score3 : score3DefaultValue})
+}}
+
+<h3>{{ 'User Registration Form'|t('recaptcha-pro') }}</h3>
+
+{{ forms.textField({
+    label: 'Score'|t('recaptcha-pro'),
+    id: 'userRegistrationFormScore3',
+    name: 'userRegistrationFormScore3',
+    value: settings.userRegistrationFormScore3,
+    errors: settings.getErrors('userRegistrationFormScore3'),
+    placeholder: settings.score3 is not empty ? settings.score3 : score3DefaultValue})
+}}
+
+<hr>
+
+<h2>{{ 'reCAPTCHA v2 Checkbox Settings'|t('recaptcha-pro') }}</h2>
+
+{{ forms.textField({
+    label: 'Site Key'|t('recaptcha-pro'),
+    id: 'siteKeyCheckbox2',
+    name: 'siteKeyCheckbox2',
+    value: settings.siteKeyCheckbox2,
+    errors: settings.getErrors('siteKeyCheckbox2')})
+}}
+
+{{ forms.textField({
+    label: 'Secret Key'|t('recaptcha-pro'),
+    id: 'secretKeyCheckbox2',
+    name: 'secretKeyCheckbox2',
+    value: settings.secretKeyCheckbox2,
+    errors: settings.getErrors('secretKeyCheckbox2')})
+}}
+
+{{ forms.selectField({
+    label: 'Theme'|t('recaptcha-pro'),
+    instructions: 'The color theme of the widget.'|t('recaptcha-pro'),
+    id: 'themeCheckbox2',
+    name: 'themeCheckbox2',
+    value: settings.themeCheckbox2,
+    options: {'': ''}|merge(settings.getThemesCheckbox2()),
+    errors: settings.getErrors('themeCheckbox2')})
+}}
+
+{{ forms.selectField({
+    label: 'Size'|t('recaptcha-pro'),
+    instructions: 'The size of the widget.'|t('recaptcha-pro'),
+    id: 'sizeCheckbox2',
+    name: 'sizeCheckbox2',
+    value: settings.sizeCheckbox2,
+    options: {'': ''}|merge(settings.getSizesCheckbox2()),
+    errors: settings.getErrors('sizeCheckbox2')})
+}}
+
+{{ forms.textField({
+    label: 'Tab Index'|t('recaptcha-pro'),
+    instructions: 'The tabindex of the widget and challenge. If other elements in your page use tabindex, it should be set to make user navigation easier.'|t('recaptcha-pro'),
+    id: 'tabindexCheckbox2',
+    name: 'tabindexCheckbox2',
+    value: settings.tabindexCheckbox2,
+    errors: settings.getErrors('tabindexCheckbox2'),
+    placeholder: tabindexCheckbox2DefaultValue})
+}}
+
+{{ forms.textField({
+    label: 'Error Message'|t('recaptcha-pro'),
+    id: 'errorMessageCheckbox2',
+    name: 'errorMessageCheckbox2',
+    value: settings.errorMessageCheckbox2,
+    errors: settings.getErrors('errorMessageCheckbox2'),
+    placeholder: errorMessageDefault})
+}}
+
+<hr>
+
+<h2>{{ 'reCAPTCHA v2 Invisible Settings'|t('recaptcha-pro') }}</h2>
+
+{{ forms.textField({
+    label: 'Site Key'|t('recaptcha-pro'),
+    id: 'siteKeyInvisible2',
+    name: 'siteKeyInvisible2',
+    value: settings.siteKeyInvisible2,
+    errors: settings.getErrors('siteKeyInvisible2')})
+}}
+
+{{ forms.textField({
+    label: 'Secret Key'|t('recaptcha-pro'),
+    id: 'secretKeyInvisible2',
+    name: 'secretKeyInvisible2',
+    value: settings.secretKeyInvisible2,
+    errors: settings.getErrors('secretKeyInvisible2')})
+}}
+
+{{ forms.selectField({
+    label: 'Badge'|t('recaptcha-pro'),
+    instructions: 'Reposition the reCAPTCHA badge. "Inline" lets you position it with CSS.'|t('recaptcha-pro'),
+    id: 'badgeInvisible2',
+    name: 'badgeInvisible2',
+    value: settings.badgeInvisible2,
+    options: {'': ''}|merge(settings.getBadgesInvisible2()),
+    errors: settings.getErrors('badgeInvisible2')})
+}}
+
+{{ forms.textField({
+    label: 'Tab Index'|t('recaptcha-pro'),
+    instructions: 'The tabindex of the challenge. If other elements in your page use tabindex, it should be set to make user navigation easier.'|t('recaptcha-pro'),
+    id: 'tabindexInvisible2',
+    name: 'tabindexInvisible2',
+    value: settings.tabindexInvisible2,
+    errors: settings.getErrors('tabindexInvisible2'),
+    placeholder: tabindexInvisible2DefaultValue})
+}}
+
+{{ forms.textField({
+    label: 'Error Message'|t('recaptcha-pro'),
+    id: 'errorMessageInvisible2',
+    name: 'errorMessageInvisible2',
+    value: settings.errorMessageInvisible2,
+    errors: settings.getErrors('errorMessageInvisible2'),
+    placeholder: errorMessageDefault})
+}}

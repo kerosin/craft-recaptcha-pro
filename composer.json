@@ -1,0 +1,45 @@
+{
+    "name": "kerosin/craft-recaptcha-pro",
+    "description": "Craft CMS plugin to verify forms via Google's reCAPTCHA.",
+    "type": "craft-plugin",
+    "version": "1.0.0",
+    "keywords": [
+        "craft",
+        "cms",
+        "craftcms",
+        "craft-plugin",
+        "craft recaptcha pro",
+        "google recaptcha"
+    ],
+    "support": {
+        "docs": "https://github.com/kerosin/craft-recaptcha-pro/blob/master/README.md",
+        "issues": "https://github.com/kerosin/craft-recaptcha-pro/issues"
+    },
+    "license": "proprietary",
+    "authors": [
+        {
+            "name": "kerosin",
+            "homepage": "https://github.com/kerosin"
+        }
+    ],
+    "require": {
+        "craftcms/cms": "^3.1.0"
+    },
+    "autoload": {
+        "psr-4": {
+          "kerosin\\recaptchapro\\": "src/"
+        }
+    },
+    "extra": {
+        "name": "reCAPTCHA Pro",
+        "handle": "recaptcha-pro",
+        "developer": "kerosin",
+        "developerUrl": "https://github.com/kerosin",
+        "documentationUrl": "https://github.com/kerosin/craft-recaptcha-pro/blob/master/README.md",
+        "changelogUrl": "https://raw.githubusercontent.com/kerosin/craft-recaptcha-pro/master/CHANGELOG.md",
+        "components": {
+            "recaptchaProService": "kerosin\\recaptchapro\\services\\RecaptchaProService"
+        },
+        "class": "kerosin\\recaptchapro\\RecaptchaPro"
+    }
+}
